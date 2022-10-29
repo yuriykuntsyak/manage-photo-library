@@ -17,3 +17,5 @@ At the moment it parses image metadata through [imagemagick](https://github.com/
 - [ ] for cypying, if found duplicate in origins, take the oldest
 - [ ] evaluate deepdiff with exclude_paths for obj comparison
 - [ ] migrate to Wand / PythonMagick / PythonMagickWand
+- [ ] purge db (remove only entries referencing deleted files)
+- [ ] distinguish filename from full path when comparing DB entries
