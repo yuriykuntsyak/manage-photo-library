@@ -11,6 +11,9 @@ from typing import Optional
 from pydantic import BaseModel, Field
 from datetime import datetime
 
+import logging
+logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
+
 class ChannelDepth(BaseModel):
     red: str = Field(..., alias='Red')
     green: str = Field(..., alias='Green')

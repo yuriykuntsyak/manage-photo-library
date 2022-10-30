@@ -9,7 +9,8 @@ This code is licensed under MIT license (see LICENSE for details)
 import logging
 from subprocess import PIPE, Popen
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
+logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
 
 from .constants import MAGICK_EXEC_PATH
 

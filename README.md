@@ -2,7 +2,12 @@
 
 ## Description
 This projects aims at managing your photo library lifecycle, from importing off of the camera to de-duplicating and organizing the photos.
-At the moment it parses image metadata through [imagemagick](https://github.com/imagemagick/imagemagick)'s cli.
+At the moment it parses image metadata through [imagemagick](https://github.com/imagemagick/imagemagick)'s cli. Tested on version 7.1.0-51.
+
+## Usage
+```sh
+python -m managephotolibrary /path/to/files/
+```
 
 ## Features
 - [ ] cli arg parser

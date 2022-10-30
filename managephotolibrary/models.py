@@ -13,7 +13,8 @@ from .database import Base
 from typing import Optional
 from datetime import datetime
 
-
+import logging
+logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
 
 # class User(Base):
 #     __tablename__ = "users"
@@ -115,15 +116,14 @@ from datetime import datetime
 class Properties(Base):
     __tablename__ = "properties"
     id = Column(Integer, primary_key=True)
-
-    image = relationship("Image", back_populates="properties")
+    image = relationship("Image", back_populates="properties", uselist=False)
     image_filename = Column(String, ForeignKey("images.filename"))
 
-    date_create = Column(DateTime)
-    date_modify = Column(DateTime)
-    date_timestamp = Column(DateTime)
+    date_create = Column(DateTime(timezone=True))
+    date_modify = Column(DateTime(timezone=True))
+    date_timestamp = Column(DateTime(timezone=True))
     dng_camera_model_name = Column(String, index=True)
-    dng_create_date = Column(DateTime)
+    dng_create_date = Column(DateTime(timezone=True))
     dng_exposure_time = Column(String, index=True)
     dng_f_number = Column(Float)
     dng_focal_length = Column(String, index=True)
@@ -154,44 +154,50 @@ class Properties(Base):
 class Image(Base):
     __tablename__ = "images"
     filename = Column(String, index=True, primary_key=True)
-    # format = Column(String, index=True)
-    # class_ = Column(String, index=True)
-    # geometry = Column(String, index=True)
-    # units = Column(String, index=True)
-    # colorspace = Column(String, index=True)
-    # type = Column(String, index=True)
-    # base_type = Column(String, index=True)
-    # endianness = Column(String, index=True)
-    # depth = Column(String, index=True)
+    format = Column(String, index=True)
+    class_ = Column(String, index=True)
+    geometry = Column(String, index=True)
+    units = Column(String, index=True)
+    colorspace = Column(String, index=True)
+    type = Column(String, index=True)
+    base_type = Column(String, index=True)
+    endianness = Column(String, index=True)
+    depth = Column(String, index=True)
+
     # channel_depth: ChannelDepth = Field(..., alias='Channel depth') #
     # channel_statistics: ChannelStatistics = Field(..., alias='Channel statistics') #
     # image_statistics: ImageStatistics = Field(..., alias='Image statistics') #
-    # rendering_intent = Column(String, index=True)
-    # gamma = Column(Float)
+
+    rendering_intent = Column(String, index=True)
+    gamma = Column(Float)
+
     # chromaticity: Chromaticity = Field(..., alias='Chromaticity') #
-    # matte_color = Column(String, index=True)
-    # background_color = Column(String, index=True)
-    # border_color = Column(String, index=True)
-    # transparent_color = Column(String, index=True)
-    # interlace = Column(String, index=True)
-    # intensity = Column(String, index=True)
-    # compose = Column(String, index=True)
-    # page_geometry = Column(String, index=True)
-    # dispose = Column(String, index=True)
-    # iterations = Column(Integer)
-    # compression = Column(String, index=True)
-    # orientation = Column(String, index=True)
+
+    matte_color = Column(String, index=True)
+    background_color = Column(String, index=True)
+    border_color = Column(String, index=True)
+    transparent_color = Column(String, index=True)
+    interlace = Column(String, index=True)
+    intensity = Column(String, index=True)
+    compose = Column(String, index=True)
+    page_geometry = Column(String, index=True)
+    dispose = Column(String, index=True)
+    iterations = Column(Integer)
+    compression = Column(String, index=True)
+    orientation = Column(String, index=True)
+
     # profiles: Profiles = Field(..., alias='Profiles') #
 
     # properties: Properties = Field(..., alias='Properties') #
-    properties = relationship("Properties", back_populates="image", cascade="all, delete, delete-orphan")
+    properties = relationship("Properties", back_populates="image", cascade="all, delete, delete-orphan", uselist=False)
 
     # artifacts: Artifacts = Field(..., alias='Artifacts') #
-    # tainted = Column(Boolean)
+
+    tainted = Column(Boolean)
     filesize = Column(String, index=True)
-    # number_pixels = Column(String, index=True)
-    # pixel_cache_type = Column(String, index=True)
-    # pixels_per_second = Column(String, index=True)
-    # user_time = Column(String, index=True)
-    # elapsed_time = Column(Float)
-    # version = Column(String, index=True)
+    number_pixels = Column(String, index=True)
+    pixel_cache_type = Column(String, index=True)
+    pixels_per_second = Column(String, index=True)
+    user_time = Column(String, index=True)
+    elapsed_time = Column(Float)
+    version = Column(String, index=True)
