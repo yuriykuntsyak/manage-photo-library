@@ -13,6 +13,7 @@ from datetime import datetime
 
 import logging
 logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
+logging.getLogger("sqlalchemy").setLevel(logging.ERROR)
 
 class ChannelDepth(BaseModel):
     red: str = Field(..., alias='Red')

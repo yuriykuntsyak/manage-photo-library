@@ -15,6 +15,7 @@ from datetime import datetime
 
 import logging
 logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
+logging.getLogger("sqlalchemy").setLevel(logging.ERROR)
 
 # class User(Base):
 #     __tablename__ = "users"
@@ -201,3 +202,10 @@ class Image(Base):
     user_time = Column(String, index=True)
     elapsed_time = Column(Float)
     version = Column(String, index=True)
+
+class UniqueImage(Base):
+    __tablename__ = "unique_images"
+    id = Column(Integer, primary_key=True)
+    # image_filename = relationship("Image", back_populates="image", uselist=False)
+    image = relationship("Image", uselist=False)
+    image_filename = Column(String, ForeignKey("images.filename"))

@@ -6,21 +6,23 @@ At the moment it parses image metadata through [imagemagick](https://github.com/
 
 ## Usage
 ```sh
-python -m managephotolibrary /path/to/files/
+python -m managephotolibrary /scan/path /output/path 2022-09-01T00:00:00 2022-10-01T00:00:00
 ```
 
 ## Features
 - [ ] cli arg parser
-- [ ] progress bar for scanning, copy etc.
+- [x] progress bar for scanning, copy etc.
 - [ ] filter by provided file extension
 - [ ] filter by provided metadata attribute(s)
 - [ ] scan multiple origin paths
 - [ ] scan destination path
-- [ ] save metadata to a sqlite db
-- [ ] if data found in db, only look if same files are present and skip metadata read
-- [ ] organize by creation date YYYY/MM/DD
-- [ ] for cypying, if found duplicate in origins, take the oldest
+- [x] save metadata to a sqlite db
+- [x] if data found in db, only look if same files are present and skip metadata read
+- [x] organize by creation date YYYY/MM/DD
+- [ ] for copying, if found duplicate in origins, take the oldest
 - [ ] evaluate deepdiff with exclude_paths for obj comparison
 - [ ] migrate to Wand / PythonMagick / PythonMagickWand
 - [ ] purge db (remove only entries referencing deleted files)
-- [ ] distinguish filename from full path when comparing DB entries
+- [x] distinguish filename from full path when comparing DB entries
+- [ ] consider switching to Joblib or other queue lib
+- [x] fix Pool not using all threads
